@@ -1,4 +1,0 @@
-/home/mot/Desktop/LFR/generated/c/src/CMakeFiles/edit_cache.dir
-/home/mot/Desktop/LFR/generated/c/src/CMakeFiles/rebuild_cache.dir
-/home/mot/Desktop/LFR/generated/c/src/CMakeFiles/Generated.dir
-/home/mot/Desktop/LFR/generated/c/src/CMakeFiles/Nativelib.dir
