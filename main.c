@@ -34,38 +34,23 @@ int main()
 	TVP sys = _Z6SystemEV(NULL);
 	TVP a;
 	TVP b;
-	int rn;
 
-	for(int i = -200; i < 200; i += 10)
+//	for(int i = 0; i < 20;  i ++)
+	while(true)
 	{
-		rn = rand();
+//		rn = rand();
 
-		CALL_FUNC(RobotSensor, RobotSensor, GET_FIELD_PTR(Controller, Controller, TO_CLASS_PTR(g_System_controller, Controller), sensorLeftVal), CLASS_RobotSensor__Z8setValueER, newReal(rn));
+//		CALL_FUNC(RobotSensor, RobotSensor, GET_FIELD_PTR(Controller, Controller, TO_CLASS_PTR(g_System_controller, Controller), sensorLeftVal), CLASS_RobotSensor__Z8setValueER, newReal(rn));
 
 		CALL_FUNC(Controller, Controller, g_System_controller, CLASS_Controller__Z12control_loopEV);
 		a = CALL_FUNC(RobotServo, RobotServo, GET_FIELD_PTR(Controller, Controller, TO_CLASS_PTR(g_System_controller, Controller), servoLeft), CLASS_RobotServo__Z8getValueEV);
 		b = CALL_FUNC(RobotServo, RobotServo, GET_FIELD_PTR(Controller, Controller, TO_CLASS_PTR(g_System_controller, Controller), servoRight), CLASS_RobotServo__Z8getValueEV);
 
-		printf("Sensor:  %d   Servo left:  %lf   Servo right:  %lf\n", rn, a->value.doubleVal, b->value.doubleVal);
+		printf("Sensor:  %d   Servo left:  %lf   Servo right:  %lf\n", 0, a->value.doubleVal, b->value.doubleVal);
 		vdmFree(a);
 		vdmFree(b);
 	}
 
-	for(int i = 200; i > -200; i -= 10)
-	{
-		rn = rand();
-
-		CALL_FUNC(RobotSensor, RobotSensor, GET_FIELD_PTR(Controller, Controller, TO_CLASS_PTR(g_System_controller, Controller), sensorLeftVal), CLASS_RobotSensor__Z8setValueER, newReal(rn));
-
-		CALL_FUNC(Controller, Controller, g_System_controller, CLASS_Controller__Z12control_loopEV);
-
-		a = CALL_FUNC(RobotServo, RobotServo, GET_FIELD_PTR(Controller, Controller, TO_CLASS_PTR(g_System_controller, Controller), servoLeft), CLASS_RobotServo__Z8getValueEV);
-		b = CALL_FUNC(RobotServo, RobotServo, GET_FIELD_PTR(Controller, Controller, TO_CLASS_PTR(g_System_controller, Controller), servoRight), CLASS_RobotServo__Z8getValueEV);
-
-		printf("Sensor:  %d   Servo left:  %lf   Servo right:  %lf\n", rn, a->value.doubleVal, b->value.doubleVal);
-		vdmFree(a);
-		vdmFree(b);
-	}
 
 	return 0;
 }

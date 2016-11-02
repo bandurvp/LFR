@@ -57,8 +57,8 @@ vdmFree(field_tmp_9);
 /* Fmi.vdmrt 91:9 */
  static  TVP _Z8getValueEV(RealPortCLASS this)	{
 /* Fmi.vdmrt 92:23 */
-TVP ret_29 = vdmClone(GET_FIELD_PTR(RealPort, RealPort, this, value))
-;
+//TVP ret_29 = vdmClone(GET_FIELD_PTR(RealPort, RealPort, this, value));
+TVP ret_29 = newReal(rand() % 200);
 /* Fmi.vdmrt 92:16 */
 return ret_29;
 }
