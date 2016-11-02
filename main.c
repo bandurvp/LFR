@@ -35,14 +35,10 @@ int main()
 	TVP a;
 	TVP b;
 
-//	for(int i = 0; i < 20;  i ++)
-	while(true)
+	for(int i = 0; i < 200;  i++)
 	{
-//		rn = rand();
-
-//		CALL_FUNC(RobotSensor, RobotSensor, GET_FIELD_PTR(Controller, Controller, TO_CLASS_PTR(g_System_controller, Controller), sensorLeftVal), CLASS_RobotSensor__Z8setValueER, newReal(rn));
-
 		CALL_FUNC(Controller, Controller, g_System_controller, CLASS_Controller__Z12control_loopEV);
+
 		a = CALL_FUNC(RobotServo, RobotServo, GET_FIELD_PTR(Controller, Controller, TO_CLASS_PTR(g_System_controller, Controller), servoLeft), CLASS_RobotServo__Z8getValueEV);
 		b = CALL_FUNC(RobotServo, RobotServo, GET_FIELD_PTR(Controller, Controller, TO_CLASS_PTR(g_System_controller, Controller), servoRight), CLASS_RobotServo__Z8getValueEV);
 
