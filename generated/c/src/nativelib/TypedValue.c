@@ -48,6 +48,9 @@ struct alloc_list_node *allocd_mem_head;
 
 void add_allocd_mem(TVP l, TVP *from)
 {
+	if(from == NULL)
+		return;
+
 	if(allocd_mem_current->loc == NULL)
 	{
 		allocd_mem_current->loc = l;
