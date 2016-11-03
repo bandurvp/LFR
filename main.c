@@ -6,9 +6,9 @@
 void create_garbage()
 {
 	TVP a;
-
 	TVP b = newInt2(33, &b);
 	TVP c = newInt2(33, &c);
+
 
 	for(int i = 0; i < 1000; i++)
 	{
@@ -26,11 +26,7 @@ int main()
 	vdm_gc();
 	create_garbage();
 	vdm_gc();
-	create_garbage();
 	vdm_gc();
-	create_garbage();
-	vdm_gc();
-
 	vdm_gc_shutdown();
 	return 0;
 }

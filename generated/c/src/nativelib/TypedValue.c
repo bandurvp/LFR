@@ -48,6 +48,7 @@ struct alloc_list_node *allocd_mem_head;
 
 void add_allocd_mem(TVP l, TVP *from)
 {
+	//These may actually be safe to reclaim unconditionally.
 	if(from == NULL)
 		return;
 
@@ -87,6 +88,10 @@ void vdm_gc()
 	current = allocd_mem_head;
 	tmp = allocd_mem_head;
 
+	//Nothing to do if no memory currently allocated.
+	if(current->loc == NULL && current->next == NULL)
+		return;
+
 	while(current != NULL)
 	{
 		if(*(current->loc->ref_from) != current->loc)
@@ -119,6 +124,9 @@ void vdm_gc()
 			current = current->next;
 		}
 	}
+
+	if(allocd_mem_current == NULL)
+		vdm_gc_init();
 
 	if(allocd_mem_head == allocd_mem_current)
 	{
