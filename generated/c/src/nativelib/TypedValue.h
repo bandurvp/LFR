@@ -115,7 +115,7 @@ int vdmCollectionSize(TVP collection);
 TVP vdmCollectionIndex(TVP collection,int index);
 void vdm_gc_init();
 void vdm_gc();
-
+void vdm_gc_shutdown();
 struct TypedValue* newInt2(int x, TVP *ref_from);
 struct TypedValue* newTypeValue2(vdmtype type, TypedValueType value, TVP *ref_from);
 
