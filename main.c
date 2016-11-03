@@ -3,40 +3,48 @@
 #include <stdio.h>
 #include <time.h>
 
-
-#define gc_map_size 2000000
-
-struct ref_map
-{
-	TVP *ref_from;
-	TVP ref_to;
-};
-
-struct ref_map gc_map[gc_map_size];
-
 void create_garbage()
 {
 	TVP a;
 
-	for(int i = 0; i < gc_map_size; i++)
+	for(int i = 0; i < 10; i++)
 	{
 		a = newInt(i);
-		gc_map[i] = (struct ref_map){&a, a};
+		add_refd_from(&a);
 	}
+
+	//	a = NULL;
 }
+
+void create_garbage2()
+{
+	TVP a;
+
+	for(int i = 0; i < 10; i++)
+	{
+		a = newInt2(i * 3, &a);
+//		add_refd_from(&a);
+	}
+
+	//	a = NULL;
+}
+
+
 
 int main()
 {
+	alloc_index = 0;
 
-	create_garbage();
-
-	for(int i = 0; i < gc_map_size; i++)
+	for(int i = 0; i < 10; i++)
 	{
-		if(*(gc_map[i].ref_from) != gc_map[i].ref_to)
-		{
-			vdmFree(gc_map[i].ref_to);
-		}
+		create_garbage();
 	}
+
+	//This call forces something to be put on the stack.
+	printf("Allocation counter is %d.\n", alloc_index);
+
+	vdm_gc();
+
 
 	return 0;
 }

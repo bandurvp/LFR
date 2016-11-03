@@ -39,6 +39,9 @@
 #define FATAL_ERROR(message) exit(EXIT_FAILURE)
 #endif
 
+#define gc_map_size 20000
+
+
 #include <time.h>
 #include <string.h>
 #include <limits.h>

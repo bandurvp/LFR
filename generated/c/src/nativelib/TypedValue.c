@@ -43,11 +43,65 @@
 
 
 
+TVP allocd_mem[gc_map_size];
+int alloc_index;
+
+/*
+struct alloc_list_node
+{
+	TVP loc;
+	struct alloc_list_node *next;
+};
+
+struct alloc_list_node allocd_mem, allocd_mem_head;
+*/
+
+void add_allocd_mem(TVP loc)
+{
+	allocd_mem[alloc_index] = loc;
+
+	/*
+	allocd_mem.loc = l;
+	allocd_mem.next = malloc(sizeof(struct alloc_list_node));
+	allocd_mem = allocd_mem.next;
+	 */
+}
+
+void add_refd_from(TVP *from)
+{
+	allocd_mem[alloc_index]->ref_from = from;
+	alloc_index += 1;
+}
+
+void vdm_gc()
+{
+	for(int i = 0; i < alloc_index; i++)
+	{
+		if(*(allocd_mem[i]->ref_from) != allocd_mem[i])
+		{
+			vdmFree(allocd_mem[i]);
+		}
+	}
+}
+
+
 struct TypedValue* newTypeValue(vdmtype type, TypedValueType value)
 {
 	struct TypedValue* ptr = (struct TypedValue*) malloc(sizeof(struct TypedValue));
 	ptr->type = type;
 	ptr->value = value;
+	add_allocd_mem(ptr);
+
+	return ptr;
+}
+
+struct TypedValue* newTypeValue2(vdmtype type, TypedValueType value, TVP *ref_from)
+{
+	struct TypedValue* ptr = (struct TypedValue*) malloc(sizeof(struct TypedValue));
+	ptr->type = type;
+	ptr->value = value;
+	add_allocd_mem(ptr);
+
 	return ptr;
 }
 
@@ -58,6 +112,14 @@ struct TypedValue* newInt(int x)
 	)
 			{ .intVal = x });
 }
+
+struct TypedValue* newInt2(int x, TVP *ref_from)
+{
+	return newTypeValue2(VDM_INT, (TypedValueType
+	)
+			{ .intVal = x }, ref_from);
+}
+
 struct TypedValue* newNat1(int x)
 {
 	return newTypeValue(VDM_NAT1, (TypedValueType
