@@ -39,7 +39,7 @@ static void Controller_free(struct Controller *this)
 static  TVP _Z17fieldInitializer1EV()	{
 
 	TVP ret_1 = vdmClone(newInt(4))
-		;
+				;
 
 	return ret_1;
 }
@@ -49,7 +49,7 @@ static  TVP _Z17fieldInitializer1EV()	{
 static  void _Z12control_loopEV(ControllerCLASS this)	{
 
 	TVP andResult_1 = newBool(false)
-		;
+				;
 
 	if ( toBool(vdmLessThan(CALL_FUNC(RobotSensor, RobotSensor, GET_FIELD_PTR(Controller, Controller, this, sensorRightVal), CLASS_RobotSensor__Z10getReadingEV), newInt(150))) )
 
@@ -64,13 +64,13 @@ static  void _Z12control_loopEV(ControllerCLASS this)	{
 	{
 		/* Controller.vdmrt 25:24 */
 		TVP embeding_1 = vdmMinus(CALL_FUNC(RealPort, RealPort, g_HardwareInterface_forwardSpeed, CLASS_RealPort__Z8getValueEV))
-		;
+				;
 		/* Controller.vdmrt 25:4 */
 		CALL_FUNC(RobotServo, RobotServo, GET_FIELD_PTR(Controller, Controller, this, servoRight), CLASS_RobotServo__Z8setServoER, embeding_1);
 		vdmFree(embeding_1);
 		/* Controller.vdmrt 26:23 */
 		TVP embeding_2 = CALL_FUNC(RealPort, RealPort, g_HardwareInterface_forwardSpeed, CLASS_RealPort__Z8getValueEV)
-		;
+				;
 		/* Controller.vdmrt 26:4 */
 		CALL_FUNC(RobotServo, RobotServo, GET_FIELD_PTR(Controller, Controller, this, servoLeft), CLASS_RobotServo__Z8setServoER, embeding_2);
 		vdmFree(embeding_2);
@@ -78,7 +78,7 @@ static  void _Z12control_loopEV(ControllerCLASS this)	{
 	;
 
 	TVP andResult_2 = newBool(false)
-		;
+				;
 
 	if ( toBool(vdmLessThan(CALL_FUNC(RobotSensor, RobotSensor, GET_FIELD_PTR(Controller, Controller, this, sensorRightVal), CLASS_RobotSensor__Z10getReadingEV), newInt(150))) )
 
@@ -93,19 +93,19 @@ static  void _Z12control_loopEV(ControllerCLASS this)	{
 	{
 		/* Controller.vdmrt 31:24 */
 		TVP embeding_3 = vdmMinus(CALL_FUNC(RealPort, RealPort, g_HardwareInterface_forwardRotate, CLASS_RealPort__Z8getValueEV))
-		;
+				;
 		/* Controller.vdmrt 31:4 */
 		CALL_FUNC(RobotServo, RobotServo, GET_FIELD_PTR(Controller, Controller, this, servoRight), CLASS_RobotServo__Z8setServoER, embeding_3);
 		/* Controller.vdmrt 32:23 */
 		TVP embeding_4 = CALL_FUNC(RealPort, RealPort, g_HardwareInterface_backwardRotate, CLASS_RealPort__Z8getValueEV)
-		;
+				;
 		/* Controller.vdmrt 32:4 */
 		CALL_FUNC(RobotServo, RobotServo, GET_FIELD_PTR(Controller, Controller, this, servoLeft), CLASS_RobotServo__Z8setServoER, embeding_4);
 	}
 	;
 
 	TVP andResult_3 = newBool(false)
-		;
+				;
 
 	if ( toBool(vdmGreaterThan(CALL_FUNC(RobotSensor, RobotSensor, GET_FIELD_PTR(Controller, Controller, this, sensorRightVal), CLASS_RobotSensor__Z10getReadingEV), newInt(150))) )
 
@@ -118,22 +118,22 @@ static  void _Z12control_loopEV(ControllerCLASS this)	{
 	{
 		/* Controller.vdmrt 37:24 */
 		TVP embeding_5 = vdmMinus(CALL_FUNC(RealPort, RealPort, g_HardwareInterface_backwardRotate, CLASS_RealPort__Z8getValueEV))
-		;
+				;
 		/* Controller.vdmrt 37:4 */
 		CALL_FUNC(RobotServo, RobotServo, GET_FIELD_PTR(Controller, Controller, this, servoRight), CLASS_RobotServo__Z8setServoER, embeding_5);
 		/* Controller.vdmrt 38:23 */
 		TVP embeding_6 = CALL_FUNC(RealPort, RealPort, g_HardwareInterface_forwardRotate, CLASS_RealPort__Z8getValueEV)
-		;
+				;
 		/* Controller.vdmrt 38:4 */
 		CALL_FUNC(RobotServo, RobotServo, GET_FIELD_PTR(Controller, Controller, this, servoLeft), CLASS_RobotServo__Z8setServoER, embeding_6);
 		vdmFree(embeding_6);
 	}
 	;
-vdmFree(andResult_3);
-vdmFree(andResult_2);
-vdmFree(andResult_1);
+	vdmFree(andResult_3);
+	vdmFree(andResult_2);
+	vdmFree(andResult_1);
 	TVP andResult_4 = newBool(false)
-		;
+				;
 
 	if ( toBool(vdmGreaterThan(CALL_FUNC(RobotSensor, RobotSensor, GET_FIELD_PTR(Controller, Controller, this, sensorRightVal), CLASS_RobotSensor__Z10getReadingEV), newInt(150))) )
 
@@ -238,12 +238,12 @@ ControllerCLASS Controller_Constructor(ControllerCLASS this_ptr)
 
 // Method for creating new "class"
 static TVP new()
-		{
+				{
 	ControllerCLASS ptr=Controller_Constructor(NULL);
 
 	return newTypeValue(VDM_CLASS, (TypedValueType)
 			{	.ptr=newClassValue(ptr->_Controller_id, &ptr->_Controller_refs, (freeVdmClassFunction)&Controller_free, ptr)});
-		}
+				}
 
 
 
@@ -271,28 +271,28 @@ TVP _Z10ControllerE10CRobotServo10CRobotServo11CRobotSensor11CRobotSensor(Contro
 	;
 	/* Controller.vdmrt 14:16 */
 	TVP field_tmp_1 = vdmClone(servL)
-		;
+				;
 
 	SET_FIELD_PTR(Controller, Controller, this, servoLeft, field_tmp_1);
 
 	vdmFree(field_tmp_1);
 	/* Controller.vdmrt 15:17 */
 	TVP field_tmp_2 = vdmClone(servR)
-		;
+				;
 
 	SET_FIELD_PTR(Controller, Controller, this, servoRight, field_tmp_2);
 
 	vdmFree(field_tmp_2);
 	/* Controller.vdmrt 16:21 */
 	TVP field_tmp_3 = vdmClone(sensRightVal)
-		;
+				;
 
 	SET_FIELD_PTR(Controller, Controller, this, sensorRightVal, field_tmp_3);
 
 	vdmFree(field_tmp_3);
 	/* Controller.vdmrt 17:20 */
 	TVP field_tmp_4 = vdmClone(sensLeftVal)
-		;
+				;
 
 	SET_FIELD_PTR(Controller, Controller, this, sensorLeftVal, field_tmp_4);
 

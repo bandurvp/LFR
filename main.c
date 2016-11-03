@@ -3,6 +3,45 @@
 #include <stdio.h>
 #include <time.h>
 
+
+#define gc_map_size 2000000
+
+struct ref_map
+{
+	TVP *ref_from;
+	TVP ref_to;
+};
+
+struct ref_map gc_map[gc_map_size];
+
+void create_garbage()
+{
+	TVP a;
+
+	for(int i = 0; i < gc_map_size; i++)
+	{
+		a = newInt(i);
+		gc_map[i] = (struct ref_map){&a, a};
+	}
+}
+
+int main()
+{
+
+	create_garbage();
+
+	for(int i = 0; i < gc_map_size; i++)
+	{
+		if(*(gc_map[i].ref_from) != gc_map[i].ref_to)
+		{
+			vdmFree(gc_map[i].ref_to);
+		}
+	}
+
+	return 0;
+}
+
+/*
 int main()
 {
 	Controller_const_init();
@@ -50,3 +89,4 @@ int main()
 
 	return 0;
 }
+ */
