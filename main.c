@@ -7,44 +7,22 @@ void create_garbage()
 {
 	TVP a;
 
-	for(int i = 0; i < 10; i++)
+	TVP b = newInt2(33, &b);
+
+	for(int i = 0; i < 100; i++)
 	{
-		a = newInt(i);
-		add_refd_from(&a);
+		a = newInt2(i, &a);
 	}
-
-	//	a = NULL;
-}
-
-void create_garbage2()
-{
-	TVP a;
-
-	for(int i = 0; i < 10; i++)
-	{
-		a = newInt2(i * 3, &a);
-//		add_refd_from(&a);
-	}
-
-	//	a = NULL;
 }
 
 
 
 int main()
 {
-	alloc_index = 0;
+	vdm_gc_init();
 
-	for(int i = 0; i < 10; i++)
-	{
-		create_garbage();
-	}
-
-	//This call forces something to be put on the stack.
-	printf("Allocation counter is %d.\n", alloc_index);
-
+	create_garbage();
 	vdm_gc();
-
 
 	return 0;
 }

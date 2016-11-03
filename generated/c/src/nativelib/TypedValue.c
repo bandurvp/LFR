@@ -42,44 +42,69 @@
 #define ASSERT_CHECK_CHAR(s) assert((s->type ==  VDM_CHAR) && "Value is not a character")
 
 
+struct alloc_list_node *allocd_mem_current;
+struct alloc_list_node *allocd_mem_head;
 
-TVP allocd_mem[gc_map_size];
-int alloc_index;
 
-/*
-struct alloc_list_node
+void add_allocd_mem(TVP l, TVP *from)
 {
-	TVP loc;
-	struct alloc_list_node *next;
-};
-
-struct alloc_list_node allocd_mem, allocd_mem_head;
-*/
-
-void add_allocd_mem(TVP loc)
-{
-	allocd_mem[alloc_index] = loc;
-
-	/*
-	allocd_mem.loc = l;
-	allocd_mem.next = malloc(sizeof(struct alloc_list_node));
-	allocd_mem = allocd_mem.next;
-	 */
+	if(allocd_mem_current->loc == NULL)
+	{
+		allocd_mem_current->loc = l;
+		allocd_mem_current->loc->ref_from = from;
+	}
+	else
+	{
+		allocd_mem_current->next = malloc(sizeof(struct alloc_list_node));
+		allocd_mem_current = allocd_mem_current->next;
+		allocd_mem_current->loc = l;
+		allocd_mem_current->loc->ref_from = from;
+		allocd_mem_current->next = NULL;
+	}
 }
 
-void add_refd_from(TVP *from)
+void vdm_gc_init()
 {
-	allocd_mem[alloc_index]->ref_from = from;
-	alloc_index += 1;
+	allocd_mem_head = malloc(sizeof(struct alloc_list_node));
+	allocd_mem_head->loc = NULL;
+	allocd_mem_head->next = NULL;
+	allocd_mem_current = allocd_mem_head;
 }
 
 void vdm_gc()
 {
-	for(int i = 0; i < alloc_index; i++)
+	struct alloc_list_node *current;
+	struct alloc_list_node *tmp;
+
+	current = allocd_mem_head;
+	tmp = allocd_mem_head;
+
+	while(current != NULL)
 	{
-		if(*(allocd_mem[i]->ref_from) != allocd_mem[i])
+		if(*(current->loc->ref_from) != current->loc)
 		{
-			vdmFree(allocd_mem[i]);
+			vdmFree(current->loc);
+
+			if(current == allocd_mem_head)
+			{
+				current = current->next;
+				free(tmp);
+				tmp = current;
+				allocd_mem_head = current;
+			}
+			else
+			{
+				tmp->next = current->next;
+				free(current);
+				current = tmp->next;
+			}
+		}
+		else
+		{
+			if(tmp != current)
+				tmp = tmp->next;
+
+			current = current->next;
 		}
 	}
 }
@@ -90,7 +115,6 @@ struct TypedValue* newTypeValue(vdmtype type, TypedValueType value)
 	struct TypedValue* ptr = (struct TypedValue*) malloc(sizeof(struct TypedValue));
 	ptr->type = type;
 	ptr->value = value;
-	add_allocd_mem(ptr);
 
 	return ptr;
 }
@@ -100,7 +124,8 @@ struct TypedValue* newTypeValue2(vdmtype type, TypedValueType value, TVP *ref_fr
 	struct TypedValue* ptr = (struct TypedValue*) malloc(sizeof(struct TypedValue));
 	ptr->type = type;
 	ptr->value = value;
-	add_allocd_mem(ptr);
+	add_allocd_mem(ptr, ref_from);
+	//	add_refd_from(ref_from);
 
 	return ptr;
 }
