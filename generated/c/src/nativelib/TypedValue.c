@@ -71,6 +71,11 @@ void vdm_gc_init()
 	allocd_mem_current = allocd_mem_head;
 }
 
+void vdm_gc_shutdown()
+{
+	free(allocd_mem_head);
+}
+
 void vdm_gc()
 {
 	struct alloc_list_node *current;
@@ -87,6 +92,8 @@ void vdm_gc()
 
 			if(current == allocd_mem_head)
 			{
+				if(allocd_mem_current == tmp)
+					allocd_mem_current = current->next;
 				current = current->next;
 				free(tmp);
 				tmp = current;
@@ -95,6 +102,8 @@ void vdm_gc()
 			else
 			{
 				tmp->next = current->next;
+				if(allocd_mem_current == current)
+					allocd_mem_current = tmp->next;
 				free(current);
 				current = tmp->next;
 			}
@@ -106,6 +115,12 @@ void vdm_gc()
 
 			current = current->next;
 		}
+	}
+
+	if(allocd_mem_head == allocd_mem_current)
+	{
+		free(allocd_mem_head);
+		vdm_gc_init();
 	}
 }
 
@@ -125,7 +140,6 @@ struct TypedValue* newTypeValue2(vdmtype type, TypedValueType value, TVP *ref_fr
 	ptr->type = type;
 	ptr->value = value;
 	add_allocd_mem(ptr, ref_from);
-	//	add_refd_from(ref_from);
 
 	return ptr;
 }

@@ -9,7 +9,7 @@ void create_garbage()
 
 	TVP b = newInt2(33, &b);
 
-	for(int i = 0; i < 100; i++)
+	for(int i = 0; i < 1000; i++)
 	{
 		a = newInt2(i, &a);
 	}
@@ -23,7 +23,20 @@ int main()
 
 	create_garbage();
 	vdm_gc();
+	create_garbage();
+	vdm_gc();
+	create_garbage();
+	vdm_gc();
+	create_garbage();
+//	printf("sdlfkj\n");
+//	printf("sdlfkj\n");
+//	printf("sdlfkj\n");
+//	printf("sdlfkj\n");
+//	printf("sdlfkj\n");
+	TVP b = newInt2(333, &b);
+	vdm_gc();
 
+	vdm_gc_shutdown();
 	return 0;
 }
 
