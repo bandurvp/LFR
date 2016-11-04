@@ -35,7 +35,7 @@ static void RealPort_free(struct RealPort *this)
 
  static  TVP _Z18fieldInitializer20EV()	{
 /* Fmi.vdmrt 82:15 */
-TVP ret_28 = (newReal(0.0))
+TVP ret_28 = vdmClone(newReal(0.0))
 ;
 
 return ret_28;

@@ -3,39 +3,7 @@
 #include <stdio.h>
 #include <time.h>
 
-void create_garbage()
-{
-	TVP a;
-	TVP b = newInt2(33, &b);
-	TVP c = newInt2(33, &c);
 
-
-	for(int i = 0; i < 1000; i++)
-	{
-		a = newInt2(i, NULL);
-	}
-}
-
-
-
-int main()
-{
-	TVP c;
-
-	vdm_gc_init();
-
-
-	c = newInt2(3, &c);
-	create_garbage();
-	vdm_gc();
-
-
-	vdm_gc_shutdown();
-
-	return 0;
-}
-
-/*
 int main()
 {
 	Controller_const_init();
@@ -62,25 +30,30 @@ int main()
 	RealPort_static_init();
 	StringPort_static_init();
 
-	srand(time(NULL));
+	vdm_gc_init();
+
+	//Changing the seed gives variable memory loss values.
+//	srand(time(NULL));
+	srand(0);
 
 	TVP sys = _Z6SystemEV(NULL);
 	TVP a;
 	TVP b;
 
-	for(int i = 0; i < 200;  i++)
+	for(int i = 0; i < 2000;  i++)
 	{
 		CALL_FUNC(Controller, Controller, g_System_controller, CLASS_Controller__Z12control_loopEV);
 
 		a = CALL_FUNC(RobotServo, RobotServo, GET_FIELD_PTR(Controller, Controller, TO_CLASS_PTR(g_System_controller, Controller), servoLeft), CLASS_RobotServo__Z8getValueEV);
 		b = CALL_FUNC(RobotServo, RobotServo, GET_FIELD_PTR(Controller, Controller, TO_CLASS_PTR(g_System_controller, Controller), servoRight), CLASS_RobotServo__Z8getValueEV);
 
-		printf("Sensor:  %d   Servo left:  %lf   Servo right:  %lf\n", 0, a->value.doubleVal, b->value.doubleVal);
+//		printf("Sensor:  %d   Servo left:  %lf   Servo right:  %lf\n", 0, a->value.doubleVal, b->value.doubleVal);
 		vdmFree(a);
 		vdmFree(b);
 	}
 
+	vdm_gc();
+	vdm_gc_shutdown();
 
 	return 0;
 }
- */

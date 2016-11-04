@@ -146,6 +146,16 @@ struct TypedValue* newReal(double x);
 struct TypedValue* newChar(char x);
 struct TypedValue* newQuote(unsigned int x);
 
+//====  Gargabe collected versions ======
+struct TypedValue* newIntGC(int x, TVP *from);
+struct TypedValue* newInt1GC(int x, TVP *from);
+struct TypedValue* newNatGC(int x, TVP *from);
+struct TypedValue* newNat1GC(int x, TVP *from);
+struct TypedValue* newBoolGC(bool x, TVP *from);
+struct TypedValue* newRealGC(double x, TVP *from);
+struct TypedValue* newCharGC(char x, TVP *from);
+struct TypedValue* newQuoteGC(unsigned int x, TVP *from);
+
 
 // Complex
 
@@ -156,6 +166,7 @@ struct TypedValue* newCollectionWithValues(size_t size, vdmtype type, TVP* eleme
 struct TypedValue* newCollection(size_t size, vdmtype type);
 
 struct TypedValue* vdmClone(struct TypedValue* x);
+struct TypedValue* vdmCloneGC(TVP x, TVP *from);
 bool equals(struct TypedValue* a, struct TypedValue* b);
 TVP vdmEquals(struct TypedValue* a, struct TypedValue* b);
 TVP vdmInEquals(struct TypedValue* a, struct TypedValue* b);
