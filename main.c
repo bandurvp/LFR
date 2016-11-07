@@ -41,8 +41,8 @@ int main()
 	TVP a;
 	TVP b;
 
-	//	for(int i = 0; i < 2000;  i++)
-	while(true)
+		for(int i = 0; i < 2000;  i++)
+//	while(true)
 	{
 		CALL_FUNC(Controller, Controller, g_System_controller, CLASS_Controller__Z12control_loopEV);
 
@@ -56,9 +56,6 @@ int main()
 		vdm_gc();
 
 	}
-
-
-	vdm_gc();
 
 	vdm_gc_shutdown();
 	return 0;

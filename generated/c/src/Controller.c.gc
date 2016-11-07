@@ -46,7 +46,7 @@ static  TVP _Z17fieldInitializer1EV()	{
 
 
 /* Controller.vdmrt 20:12 */
-static  void _Z12control_loopEV(ControllerCLASS this)	{
+static  void _Z12control_loopEV(ControllerCLASS this){
 
 	TVP andResult_1 = newBoolGC(false, &andResult_1)
 		;
