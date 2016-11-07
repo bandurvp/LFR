@@ -199,7 +199,7 @@ struct ClassType* newClassValue(int id, unsigned int* refs, freeVdmClassFunction
 /*
  * Macro to obtain a field from a (sub-)class specific class struct. We clone to preserve value semantics and the rule of freeing
  */
-#define GET_FIELD_PTR(thisTypeName, fieldTypeName, ptr, fieldName) vdmClone(GET_STRUCT_FIELD(fieldTypeName,CLASS_CAST(ptr,thisTypeName,fieldTypeName) ,struct TypedValue*,m_##fieldTypeName##_##fieldName))
+#define GET_FIELD_PTR(thisTypeName, fieldTypeName, ptr, fieldName) vdmCloneGC(GET_STRUCT_FIELD(fieldTypeName,CLASS_CAST(ptr,thisTypeName,fieldTypeName) ,struct TypedValue*,m_##fieldTypeName##_##fieldName), NULL)
 
 /*
  * Macro to set a field from a (sub-)class specific class struct.

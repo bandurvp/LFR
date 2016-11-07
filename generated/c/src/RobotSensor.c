@@ -45,7 +45,7 @@ return ret_11;
 /* RobotSensor.vdmrt 12:8 */
  static  TVP _Z10getReadingEV(RobotSensorCLASS this)	{
 /* RobotSensor.vdmrt 13:23 */
-TVP ret_12 = vdmClone(CALL_FUNC(RealPort, RealPort, GET_FIELD_PTR(RobotSensor, RobotSensor, this, port), CLASS_RealPort__Z8getValueEV))
+TVP ret_12 = (CALL_FUNC(RealPort, RealPort, GET_FIELD_PTR(RobotSensor, RobotSensor, this, port), CLASS_RealPort__Z8getValueEV))
 ;
 /* RobotSensor.vdmrt 13:16 */
 return ret_12;
@@ -147,8 +147,8 @@ static TVP new()
 {
 	RobotSensorCLASS ptr=RobotSensor_Constructor(NULL);
 
-	return newTypeValue(VDM_CLASS, (TypedValueType)
-			{	.ptr=newClassValue(ptr->_RobotSensor_id, &ptr->_RobotSensor_refs, (freeVdmClassFunction)&RobotSensor_free, ptr)});
+	return newTypeValueGC(VDM_CLASS, (TypedValueType)
+			{	.ptr=newClassValue(ptr->_RobotSensor_id, &ptr->_RobotSensor_refs, (freeVdmClassFunction)&RobotSensor_free, ptr)}, NULL);
 }
 
 
