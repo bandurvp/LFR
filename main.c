@@ -33,7 +33,7 @@ int main()
 	vdm_gc_init();
 
 	//Changing the seed gives variable memory loss values.
-//	srand(time(NULL));
+	//	srand(time(NULL));
 	srand(0);
 
 	TVP sys = _Z6SystemEV(NULL);
@@ -47,12 +47,23 @@ int main()
 		a = CALL_FUNC(RobotServo, RobotServo, GET_FIELD_PTR(Controller, Controller, TO_CLASS_PTR(g_System_controller, Controller), servoLeft), CLASS_RobotServo__Z8getValueEV);
 		b = CALL_FUNC(RobotServo, RobotServo, GET_FIELD_PTR(Controller, Controller, TO_CLASS_PTR(g_System_controller, Controller), servoRight), CLASS_RobotServo__Z8getValueEV);
 
-//		printf("Sensor:  %d   Servo left:  %lf   Servo right:  %lf\n", 0, a->value.doubleVal, b->value.doubleVal);
+		//		printf("Sensor:  %d   Servo left:  %lf   Servo right:  %lf\n", 0, a->value.doubleVal, b->value.doubleVal);
 		vdmFree(a);
 		vdmFree(b);
 	}
 
 	vdm_gc();
+
+	//Why does this not segfault?  Most likely because the memory remains the same when it is freed until it is overwritten by something else.
+	a = newIntGC(3, &a);
+	vdmFree(a);
+	a = newIntGC(4, &a);
+	a = newIntGC(5, &a);
+	vdm_gc();
+//	vdmFree(a);
+	printf("sldfkj\n");
+	vdm_gc();
+
 	vdm_gc_shutdown();
 
 	return 0;
