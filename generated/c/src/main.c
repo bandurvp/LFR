@@ -83,9 +83,9 @@ int main()
 	for(i = 0; i < 30; i++)
 	{
 		a = fn();
-		add_allocd_mem(a, &a);
+		add_allocd_mem_node(a, &a);
 		b = fn();
-		add_allocd_mem(b, &b);
+		add_allocd_mem_node(b, &b);
 	}
 
 
