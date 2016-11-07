@@ -57,7 +57,7 @@ vdmFree(field_tmp_8);
 /* Fmi.vdmrt 74:9 */
  static  TVP _Z8getValueEV(BoolPortCLASS this)	{
 /* Fmi.vdmrt 75:23 */
-TVP ret_27 = vdmClone(GET_FIELD_PTR(BoolPort, BoolPort, this, value))
+TVP ret_27 = vdmClone(GET_FIELD_PTR_GC(BoolPort, BoolPort, this, value))
 ;
 /* Fmi.vdmrt 75:16 */
 return ret_27;

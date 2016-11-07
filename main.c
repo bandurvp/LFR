@@ -46,8 +46,8 @@ int main()
 	{
 		CALL_FUNC(Controller, Controller, g_System_controller, CLASS_Controller__Z12control_loopEV);
 
-		a = CALL_FUNC(RobotServo, RobotServo, GET_FIELD_PTR(Controller, Controller, TO_CLASS_PTR(g_System_controller, Controller), servoLeft), CLASS_RobotServo__Z8getValueEV);
-		b = CALL_FUNC(RobotServo, RobotServo, GET_FIELD_PTR(Controller, Controller, TO_CLASS_PTR(g_System_controller, Controller), servoRight), CLASS_RobotServo__Z8getValueEV);
+		a = CALL_FUNC(RobotServo, RobotServo, GET_FIELD_PTR_GC(Controller, Controller, TO_CLASS_PTR(g_System_controller, Controller), servoLeft), CLASS_RobotServo__Z8getValueEV);
+		b = CALL_FUNC(RobotServo, RobotServo, GET_FIELD_PTR_GC(Controller, Controller, TO_CLASS_PTR(g_System_controller, Controller), servoRight), CLASS_RobotServo__Z8getValueEV);
 
 		printf("Sensor:  %d   Servo left:  %lf   Servo right:  %lf\n", 0, a->value.doubleVal, b->value.doubleVal);
 		vdmFree(a);

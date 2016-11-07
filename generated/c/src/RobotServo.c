@@ -45,14 +45,14 @@ return ret_13;
 /* RobotServo.vdmrt 12:8 */
  static  void _Z8setServoER(RobotServoCLASS this, TVP value)	{
 /* RobotServo.vdmrt 13:19 */
-CALL_FUNC(RealPort, RealPort, GET_FIELD_PTR(RobotServo, RobotServo, this, port), CLASS_RealPort__Z8setValueER, value);
+CALL_FUNC(RealPort, RealPort, GET_FIELD_PTR_GC(RobotServo, RobotServo, this, port), CLASS_RealPort__Z8setValueER, value);
 }
 
 
 /* RobotServo.vdmrt 15:8 */
  static  TVP _Z8getValueEV(RobotServoCLASS this)	{
 /* RobotServo.vdmrt 16:21 */
-TVP ret_14 = vdmClone(CALL_FUNC(RealPort, RealPort, GET_FIELD_PTR(RobotServo, RobotServo, this, port), CLASS_RealPort__Z8getValueEV))
+TVP ret_14 = vdmClone(CALL_FUNC(RealPort, RealPort, GET_FIELD_PTR_GC(RobotServo, RobotServo, this, port), CLASS_RealPort__Z8getValueEV))
 ;
 /* RobotServo.vdmrt 16:14 */
 return ret_14;
