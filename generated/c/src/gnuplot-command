@@ -1,0 +1,1 @@
+plot [0:500][0:16000000] "values.GC" every 1 title "With GC", "values.noGC" every 1 title "Without GC"
